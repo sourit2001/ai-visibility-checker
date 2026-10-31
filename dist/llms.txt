@@ -1,0 +1,18 @@
+# Mentioned
+
+> Mentioned is a free AI visibility checker for websites. It shows whether ChatGPT, Perplexity and Google AI Mode name your brand when buyers ask for recommendations, and gives an AI visibility score.
+
+## How it works
+- You enter what you sell, who it is for, your brand, and optionally your website and a competitor.
+- It prepares buyer questions ("What's the best invoicing app for freelancers?", "What are the best alternatives to X?") plus one question that asks the AI about your brand by name.
+- Each question opens in ChatGPT (with web search), Perplexity and Google AI Mode in one click. You read the real answer and mark whether your brand was named first, named, or not named.
+- Score: 100 for named first, 60 for named, 0 for not named, averaged across marked answers.
+- Free, no account. Inputs stay in the browser. Automatic weekly checks are planned (waitlist).
+
+## Also on the page
+- How to check if ChatGPT mentions your brand
+- How to get your brand mentioned by ChatGPT (and show up in AI search and Google AI Overviews)
+- AI search monitoring tools compared: Otterly.AI, Peec AI, Profound, Semrush, Ahrefs
+
+## Pages
+- [Free AI visibility checker](https://sourit2001.github.io/ai-visibility-checker/)
