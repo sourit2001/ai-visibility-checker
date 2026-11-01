@@ -6,6 +6,8 @@
   const STORE = 'mentioned-check-v1';
 
   const $ = (s, r = document) => r.querySelector(s);
+  /* Analytics events (no brand names or questions are sent). */
+  const track = (name, params) => { try { if (window.gtag) window.gtag('event', name, params || {}); } catch { /* ignore */ } };
   const form = $('#madlib');
   const f = {
     category: $('#f-category'), audience: $('#f-audience'), brand: $('#f-brand'),
@@ -77,6 +79,7 @@
         a.dataset.engine = eng.id;
         a.textContent = `Ask ${eng.name}`;
         a.href = eng.url(q.text);
+        a.addEventListener('click', () => track('ask_engine', { engine: eng.id, question_kind: q.kind }));
         const group = document.createElement('div');
         group.className = 'eng-marks';
         group.setAttribute('role', 'group');
@@ -93,6 +96,7 @@
             group.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(state.marks[key] === x.dataset.v)));
             save();
             score();
+            if (state.marks[key]) track('mark_answer', { engine: eng.id, mark: v });
           });
           group.append(b);
         });
@@ -178,6 +182,7 @@
     const same = JSON.stringify(state.inputs) === JSON.stringify(v);
     if (!same) state = { inputs: v, questions: buildQuestions(v), marks: {} };
     save();
+    track('build_check', { has_site: !!v.site, has_rival: !!v.rival });
     show(true);
   });
 
@@ -203,6 +208,7 @@
       msg.hidden = false;
       return;
     }
+    track('waitlist_submit');
     const payload = { email: email.value, brand: state.inputs.brand || '', category: state.inputs.category || '', page: location.pathname };
     if (!WAITLIST_ENDPOINT) {
       location.href = `mailto:${WAITLIST_EMAIL}?subject=${encodeURIComponent('Weekly AI visibility check')}&body=${encodeURIComponent(`Please notify ${payload.email} (${payload.brand}).`)}`;
